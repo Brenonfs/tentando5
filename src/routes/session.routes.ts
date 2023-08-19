@@ -1,10 +1,10 @@
-import { Router } from "express";
+import { Router } from 'express';
+
+import { CreateSession } from '../controllers/SessionController';
 const sessionRoutes = Router();
-import {CreateSession} from '../controllers/SessionController';
 
 const createSession = new CreateSession();
 
-
 sessionRoutes.post('/', createSession.handle);
 
-export{sessionRoutes}
+export { sessionRoutes };
