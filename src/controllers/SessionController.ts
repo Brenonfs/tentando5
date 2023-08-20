@@ -1,4 +1,4 @@
-import { hash, compare } from 'bcryptjs';
+import { compare } from 'bcryptjs';
 import { Request, Response } from 'express';
 import { sign } from 'jsonwebtoken';
 
@@ -7,7 +7,7 @@ import { prisma } from '../database';
 import { UnauthorizedError } from '../helpers/api-erros';
 
 export class CreateSession {
-  async handle(req: Request, res: Response) {
+  async create(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
       const userExist = await prisma.user.findFirst({

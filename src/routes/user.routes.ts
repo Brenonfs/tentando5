@@ -1,13 +1,12 @@
 import { Router } from 'express';
 
-import { CreateUser, UpdateUser } from '../controllers/UserController';
+import { UserControllers } from '../controllers/UserControllers'; // alterado
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 const userRoutes = Router();
 
-const createUser = new CreateUser();
-const updateUser = new UpdateUser();
+const userControllers = new UserControllers();
 
-userRoutes.post('/', createUser.handle);
-userRoutes.put('/', ensureAuthenticated, updateUser.handle);
+userRoutes.post('/', userControllers.create);
+userRoutes.put('/', ensureAuthenticated, userControllers.update);
 
 export { userRoutes };

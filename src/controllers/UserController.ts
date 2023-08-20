@@ -40,7 +40,7 @@ export class UpdateUser {
       throw new UnauthorizedError('Usuário não autenticado');
     }
     const userExists = await prisma.user.findUnique({
-      where: { id: Number(userId) }, // acho q to fazendo 2 vezes
+      where: { id: Number(userId) },
     });
     if (!userExists) {
       throw new UnauthorizedError(`Usuário não encontrado.`);

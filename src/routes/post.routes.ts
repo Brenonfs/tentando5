@@ -1,16 +1,15 @@
 import { Router } from 'express';
 
-import { CreatePost, UpdatePost, DeletePost } from '../controllers/PostController';
+import { PostControllers } from '../controllers/PostControllers';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 const postRoutes = Router();
 
-const createPost = new CreatePost();
-const updatePost = new UpdatePost();
-const deletePost = new DeletePost();
+const postControllers = new PostControllers();
 
 postRoutes.use(ensureAuthenticated);
-postRoutes.post('/', createPost.handle);
-postRoutes.put('/:id', updatePost.handle);
-postRoutes.delete('/:id', deletePost.handle);
+postRoutes.post('/', postControllers.create);
+postRoutes.get('/:id', postControllers.list);
+postRoutes.put('/:id', postControllers.update);
+postRoutes.delete('/:id', postControllers.delete);
 
 export { postRoutes };
