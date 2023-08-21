@@ -1,5 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'dotenv/config';
 import { UnauthorizedError } from './helpers/api-erros';
 import { router } from './routes';
 
@@ -26,4 +28,6 @@ app.use((error: UnauthorizedError, req: Request, res: Response, next: NextFuncti
   });
 });
 
-app.listen(5000, () => console.log(`Server is running at 5000`)); // quando a aplicação iniciar, essa mensagem vai aparecer "listen"
+app.listen(process.env.PORT || 3333, () => {
+  console.log(`app listening on port ${process.env.PORT}`);
+});
