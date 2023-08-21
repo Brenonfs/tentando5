@@ -4,6 +4,7 @@ import { UnauthorizedError } from '../helpers/api-erros';
 import { CreatePostService } from '../services/PostService/create.post.service';
 import { DeletePostService } from '../services/PostService/delete.post.service';
 import { ListPostService } from '../services/PostService/list.post.service';
+import { SearchPostService } from '../services/PostService/searchPost.service copy';
 import { UpdatePostService } from '../services/PostService/update.post.service';
 
 export class PostControllers {
@@ -61,6 +62,20 @@ export class PostControllers {
       });
     } catch (error) {
       throw new UnauthorizedError(`Não foi possível listar o post: ${error}`);
+    }
+  }
+  async search(req: Request, res: Response) {
+    try {
+      const searchPostService = new SearchPostService();
+      const result = await searchPostService.execute(req);
+
+      return res.json({
+        error: false,
+        message: 'Sucess',
+        result,
+      });
+    } catch (error) {
+      throw new UnauthorizedError(`Não foi possível fazer a busca: ${error}`);
     }
   }
 }

@@ -14,6 +14,17 @@ export class PostRepository {
     });
     return postExist;
   }
+  async findBySearch(search: string, userId: number) {
+    const postExist = await prisma.post.findMany({
+      where: {
+        title: {
+          contains: search,
+        },
+        userId,
+      },
+    });
+    return postExist;
+  }
   async updatePost(title: string, content: string, id: number) {
     const post = await prisma.post.update({
       where: {

@@ -15,6 +15,9 @@ class ListPostService {
     if (!postExists) {
       throw new UnauthorizedError('Nenhum post foi encontrado.');
     }
+    if (userId !== postExists.userId) {
+      throw new UnauthorizedError('Nenhum post foi encontrado.');
+    }
     return postExists;
   }
 }

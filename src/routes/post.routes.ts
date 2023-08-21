@@ -9,6 +9,7 @@ const postControllers = new PostControllers();
 postRoutes.use(ensureAuthenticated);
 postRoutes.post('/', postControllers.create);
 postRoutes.get('/:id', postControllers.list);
+postRoutes.get('/', postControllers.search);
 postRoutes.put('/:id', postControllers.update);
 postRoutes.delete('/:id', postControllers.delete);
 

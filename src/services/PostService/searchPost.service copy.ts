@@ -3,23 +3,19 @@ import { Request } from 'express';
 import { UnauthorizedError } from '../../helpers/api-erros';
 import { PostRepository } from '../../repositories/post.repository';
 
-class DeletePostService {
+class SearchPostService {
   async execute(req: Request) {
-    const { id } = req.params;
+    const search = req.query.search as string;
     const userId = req.user?.id;
     if (userId === undefined) {
       throw new UnauthorizedError('Usuário não autenticado.');
     }
     const postRepository = new PostRepository();
-    const postExists = await postRepository.findById(Number(id));
-    if (!postExists) {
+    const postExists = await postRepository.findBySearch(search, userId);
+    if (!postExists || postExists.length === 0) {
       throw new UnauthorizedError('Nenhum post foi encontrado.');
     }
-    if (userId !== postExists.userId) {
-      throw new UnauthorizedError('Nenhum post foi encontrado.');
-    }
-    const post = await postRepository.deletePost(Number(id));
-    return post;
+    return postExists;
   }
 }
-export { DeletePostService };
+export { SearchPostService };
