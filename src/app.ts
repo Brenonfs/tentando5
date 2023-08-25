@@ -1,6 +1,8 @@
 import express, { Request, Response } from 'express';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
+import 'express-async-errors';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import 'dotenv/config';
 import { UnauthorizedError } from './helpers/api-erros';
 import { router } from './routes';

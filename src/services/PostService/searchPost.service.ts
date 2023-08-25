@@ -9,7 +9,7 @@ class SearchPostService {
     const userId = req.user?.id;
     if (userId === undefined) {
       throw new UnauthorizedError('Usuário não autenticado.');
-    }
+    } // aqui faz diferença
     const postRepository = new PostRepository();
     const postExists = await postRepository.findBySearch(search, userId);
     if (!postExists || postExists.length === 0) {

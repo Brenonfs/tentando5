@@ -8,18 +8,19 @@ class UpdateUserService {
   async execute(req: Request) {
     const { name, email, password, old_password } = req.body;
     const userId = req.user?.id;
-    if (!Number.isInteger(userId)) {
-      throw new UnauthorizedError('userId inválido');
-    }
+
+    // if (!Number.isInteger(userId)) {
+    //   throw new UnauthorizedError('userId inválido');
+    // }
     if (!userId) {
       throw new UnauthorizedError('Usuário não autenticado');
-    }
+    } // isso eu n consigo verificar
     const userRepository = new UserRepository();
     const userExists = await userRepository.findByUser(userId);
 
     if (!userExists) {
       throw new UnauthorizedError(`Usuário não encontrado.`);
-    }
+    } // isso eu n consigo verificar
     const userWithUpdatedEmail = await userRepository.findByEmail(email);
     if (userWithUpdatedEmail && email !== undefined) {
       throw new UnauthorizedError(`Email já em uso.`);

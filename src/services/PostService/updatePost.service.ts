@@ -8,10 +8,9 @@ class UpdatePostService {
     const { id } = req.params;
     const { title, content } = req.body;
     const userId = req.user?.id;
-    if (userId === undefined) {
-      throw new UnauthorizedError('Usuário não autenticado.');
-    }
-
+    // if (userId === undefined) {
+    //   throw new UnauthorizedError('Usuário não autenticado.');
+    // } to tirando isso pq n ta fazendo diferença
     const postRepository = new PostRepository();
     const postExists = await postRepository.findById(Number(id));
     if (!postExists) {

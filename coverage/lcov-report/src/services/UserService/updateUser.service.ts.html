@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.72% </span>
+                <span class="strong">95.55% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>32/44</span>
+                <span class='fraction'>43/45</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">76.92% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/8</span>
+                <span class='fraction'>10/13</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.72% </span>
+                <span class="strong">95.55% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>32/44</span>
+                <span class='fraction'>43/45</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -107,7 +107,8 @@
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -115,37 +116,38 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -161,34 +163,35 @@ class UpdateUserService {
   async execute(req: Request) {
     const { name, email, password, old_password } = req.body;
     const userId = req.user?.id;
-    if (!Number.isInteger(userId)) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      throw new UnauthorizedError('userId inválido');</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+&nbsp;
+    // if (!Number.isInteger(userId)) {
+    //   throw new UnauthorizedError('userId inválido');
+    // }
     if (!userId) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >      throw new UnauthorizedError('Usuário não autenticado');</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    } // isso eu n consigo verificar
     const userRepository = new UserRepository();
     const userExists = await userRepository.findByUser(userId);
 &nbsp;
     if (!userExists) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >      throw new UnauthorizedError(`Usuário não encontrado.`);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    } // isso eu n consigo verificar
     const userWithUpdatedEmail = await userRepository.findByEmail(email);
-    if (userWithUpdatedEmail &amp;&amp; email !== undefined) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      throw new UnauthorizedError(`Email já em uso.`);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    if (userWithUpdatedEmail &amp;&amp; email !== undefined) {
+      throw new UnauthorizedError(`Email já em uso.`);
+    }
     userExists.name = <span class="branch-0 cbranch-no" title="branch not covered" >name ?? userExists.name;</span>
     userExists.email = email ?? userExists.email;
 &nbsp;
-    if (password &amp;&amp; !old_password) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      throw new UnauthorizedError(`Você precisa informa a senha antiga para a nova`);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    if (password &amp;&amp; !old_password) {
+      throw new UnauthorizedError(`Você precisa informa a senha antiga para a nova`);
+    }
 &nbsp;
     if (password &amp;&amp; old_password) {
       const checkOldPassword = await compare(old_password, userExists.password);
-      if (!checkOldPassword) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        throw new UnauthorizedError(`A senha antiga não confere`);</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+      if (!checkOldPassword) {
+        throw new UnauthorizedError(`A senha antiga não confere`);
+      }
     }
     const user = await userRepository.updateUser(name, email, password, userId);
     return user;
@@ -202,7 +205,7 @@ export { UpdateUserService };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-24T09:24:15.127Z
+                at 2023-08-25T06:20:37.476Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
