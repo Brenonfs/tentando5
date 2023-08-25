@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { verify } from 'jsonwebtoken';
+import { verify, Secret } from 'jsonwebtoken';
 
 import { jwtConfig } from '../configs/auth';
-import { prisma } from '../database';
 import { UnauthorizedError } from '../helpers/api-erros';
 
 declare module 'express-serve-static-core' {
@@ -24,11 +23,15 @@ const ensureAuthenticated = async (req: Request, res: Response, next: NextFuncti
   const [, token] = authHeader.split(' ');
 
   try {
-    const decodedToken = verify(token, jwtConfig.secret) as { sub: string };
-    req.user = {
-      id: Number(decodedToken.sub),
-    };
-    return next();
+    if (jwtConfig && jwtConfig.secret !== undefined) {
+      const decodedToken = verify(token, jwtConfig.secret) as { sub: string };
+      req.user = {
+        id: Number(decodedToken.sub),
+      };
+      return next();
+    } else {
+      throw new Error('JWT configuration is not properly set');
+    }
   } catch {
     throw new UnauthorizedError('JWT Token invalid');
   }

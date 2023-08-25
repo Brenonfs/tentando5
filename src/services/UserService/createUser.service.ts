@@ -1,11 +1,8 @@
-import { Request } from 'express';
-
 import { UnauthorizedError } from '../../helpers/api-erros';
 import { UserRepository } from '../../repositories/user.repository';
 
 class CreateUserService {
-  async execute(req: Request) {
-    const { name, email, password } = req.body;
+  async execute(name: string, email: string, password: string) {
     const userRepository = new UserRepository();
     const userExists = await userRepository.findByEmail(email);
     if (userExists) {

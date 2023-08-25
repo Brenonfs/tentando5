@@ -20,16 +20,17 @@ class CreateSessionService {
     if (!passwordMatched) {
       throw new UnauthorizedError('Email e/ou senha incorreta');
     }
-
-    const { secret, expiresIn } = jwtConfig;
-    const token = sign({}, secret, {
-      subject: String(userExist.id),
-      expiresIn,
-    });
-    return {
-      user: userExist,
-      token,
-    };
+    if (jwtConfig && jwtConfig.secret !== undefined) {
+      const { secret, expiresIn } = jwtConfig;
+      const token = sign({}, secret, {
+        subject: String(userExist.id),
+        expiresIn,
+      });
+      return {
+        user: userExist,
+        token,
+      };
+    }
   }
 }
 

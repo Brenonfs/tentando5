@@ -1,17 +1,22 @@
 import { Request, Response } from 'express';
 
 import { UnauthorizedError } from '../helpers/api-erros';
-import { CreatePostService } from '../services/PostService/create.post.service';
-import { DeletePostService } from '../services/PostService/delete.post.service';
-import { ListPostService } from '../services/PostService/list.post.service';
-import { SearchPostService } from '../services/PostService/searchPost.service copy';
-import { UpdatePostService } from '../services/PostService/update.post.service';
+import { CreatePostService } from '../services/PostService/createPost.service';
+import { DeletePostService } from '../services/PostService/deletePost.service';
+import { ListPostService } from '../services/PostService/listPost.service';
+import { SearchPostService } from '../services/PostService/searchPost.service';
+import { UpdatePostService } from '../services/PostService/updatePost.service';
 
 export class PostControllers {
   async create(req: Request, res: Response) {
+    const { title, content } = req.body;
+    const userId = req.user?.id;
+    if (userId === undefined) {
+      throw new UnauthorizedError('Usuário não autenticado.');
+    }
     try {
       const createPostService = new CreatePostService();
-      const result = await createPostService.execute(req);
+      const result = await createPostService.execute(title, content, userId);
 
       return res.json({
         error: false,

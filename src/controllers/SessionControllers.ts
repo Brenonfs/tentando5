@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import { UnauthorizedError } from '../helpers/api-erros';
-import { CreateSessionService } from '../services/SessionService/create.session.service';
+import { CreateSessionService } from '../services/SessionService/createSession.service';
 
 export class CreateSession {
   async create(req: Request, res: Response) {

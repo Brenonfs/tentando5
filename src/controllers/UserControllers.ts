@@ -1,14 +1,15 @@
 import { Request, Response } from 'express';
 
 import { UnauthorizedError } from '../helpers/api-erros';
-import { CreateUserService } from '../services/UserService/create.user.service';
-import { UpdateUserService } from '../services/UserService/update.user.service';
+import { CreateUserService } from '../services/UserService/createUser.service';
+import { UpdateUserService } from '../services/UserService/updateUser.service';
 
 export class UserControllers {
   async create(req: Request, res: Response) {
     try {
+      const { name, email, password } = req.body;
       const createUserService = new CreateUserService();
-      const result = await createUserService.execute(req);
+      const result = await createUserService.execute(name, email, password);
 
       return res.json({
         error: false,

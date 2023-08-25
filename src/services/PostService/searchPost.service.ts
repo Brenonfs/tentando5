@@ -13,7 +13,7 @@ class SearchPostService {
     const postRepository = new PostRepository();
     const postExists = await postRepository.findBySearch(search, userId);
     if (!postExists || postExists.length === 0) {
-      throw new UnauthorizedError('Nenhum post foi encontrado.');
+      throw new UnauthorizedError('Nenhum post foi encontrado por conta q ta vazio ou não existe.');
     }
     return postExists;
   }
