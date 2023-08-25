@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1692944437621" clover="3.2.0">
-  <project timestamp="1692944437621" name="All files">
-    <metrics statements="607" coveredstatements="578" conditionals="84" coveredconditionals="77" methods="35" coveredmethods="33" elements="726" coveredelements="688" complexity="0" loc="607" ncloc="607" packages="11" files="23" classes="23"/>
+<coverage generated="1692973843435" clover="3.2.0">
+  <project timestamp="1692973843435" name="All files">
+    <metrics statements="607" coveredstatements="579" conditionals="84" coveredconditionals="77" methods="35" coveredmethods="33" elements="726" coveredelements="689" complexity="0" loc="607" ncloc="607" packages="11" files="23" classes="23"/>
     <package name="src">
       <metrics statements="33" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="app.ts" path="C:\Users\breno\OneDrive\Área de Trabalho\Area d Trabalho\PROGAMÇÃO\Tentando 5\src\app.ts">
@@ -251,9 +251,9 @@
       </file>
     </package>
     <package name="src.middlewares">
-      <metrics statements="40" coveredstatements="36" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <metrics statements="40" coveredstatements="37" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
       <file name="ensureAuthenticated.ts" path="C:\Users\breno\OneDrive\Área de Trabalho\Area d Trabalho\PROGAMÇÃO\Tentando 5\src\middlewares\ensureAuthenticated.ts">
-        <metrics statements="40" coveredstatements="36" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <metrics statements="40" coveredstatements="37" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -274,7 +274,7 @@
         <line num="18" count="30" type="stmt"/>
         <line num="19" count="30" type="cond" truecount="0" falsecount="1"/>
         <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
+        <line num="21" count="30" type="stmt"/>
         <line num="22" count="30" type="stmt"/>
         <line num="23" count="30" type="stmt"/>
         <line num="24" count="30" type="stmt"/>
