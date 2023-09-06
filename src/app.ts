@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'express-async-errors';
@@ -12,9 +12,10 @@ const app = express();
 app.use(express.json());
 app.use(router);
 
-app.use((error: UnauthorizedError, req: Request, res: Response) => {
+app.use((error: UnauthorizedError, req: Request, res: Response, next: NextFunction) => {
   if (error instanceof UnauthorizedError) {
     // gerado pelo cliente
+    console.log('entrei aqui ');
     return res.status(error.statusCode).json({
       status: 'error',
       message: error.message,
