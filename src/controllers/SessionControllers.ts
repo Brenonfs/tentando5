@@ -5,6 +5,7 @@ import { CreateSessionService } from '../services/SessionService/createSession.s
 
 export class CreateSession {
   async create(req: Request, res: Response) {
+    console.log('aqui 1?');
     try {
       const createSessionService = new CreateSessionService();
       const result = await createSessionService.execute(req);

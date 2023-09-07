@@ -15,6 +15,7 @@ model User{
   name      String
   email     String    @unique
   password  String
+  idPerson  Int
   Posts  Post[]
 
   @@map("users")

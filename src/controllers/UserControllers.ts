@@ -12,10 +12,9 @@ export class UserControllers {
       const { name, email, password, cpf, dataNascimento } = req.body;
       const body = { name, cpf, dataNascimento };
       const response = await axios.post(`${baseUrl}/people/`, body);
-      console.log(response.status);
+      const idPerson = response.data.result.id;
       const createUserService = new CreateUserService();
-      const result = await createUserService.execute(name, email, password);
-
+      const result = await createUserService.execute(name, email, password, idPerson);
       return res.json({
         error: false,
         message: 'Sucess: user created',
@@ -26,9 +25,11 @@ export class UserControllers {
     }
   }
   async update(req: Request, res: Response) {
+    const { name, email, password, old_password, idPerson } = req.body;
+    const userId = req.user?.id;
     try {
       const updateUserService = new UpdateUserService();
-      const result = await updateUserService.execute(req);
+      const result = await updateUserService.execute(name, email, password, old_password, idPerson, userId);
 
       return res.json({
         error: false,

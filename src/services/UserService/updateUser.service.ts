@@ -5,10 +5,7 @@ import { UnauthorizedError } from '../../helpers/api-erros';
 import { UserRepository } from '../../repositories/user.repository';
 
 class UpdateUserService {
-  async execute(req: Request) {
-    const { name, email, password, old_password } = req.body;
-    const userId = req.user?.id;
-
+  async execute(name: string, email: string, password: string, old_password: string, idPerson: number, userId: any) {
     // if (!Number.isInteger(userId)) {
     //   throw new UnauthorizedError('userId inválido');
     // }
@@ -27,6 +24,7 @@ class UpdateUserService {
     }
     userExists.name = name ?? userExists.name;
     userExists.email = email ?? userExists.email;
+    userExists.idPerson = idPerson ?? userExists.idPerson;
 
     if (password && !old_password) {
       throw new UnauthorizedError(`Você precisa informa a senha antiga para a nova`);
@@ -38,7 +36,7 @@ class UpdateUserService {
         throw new UnauthorizedError(`A senha antiga não confere`);
       }
     }
-    const user = await userRepository.updateUser(name, email, password, userId);
+    const user = await userRepository.updateUser(name, email, password, userId, idPerson);
     return user;
   }
 }

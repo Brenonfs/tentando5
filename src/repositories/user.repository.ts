@@ -10,10 +10,10 @@ export class UserRepository {
     });
     return userExists;
   }
-  async saveUser(name: string, email: string, password: string) {
+  async saveUser(name: string, email: string, password: string, idPerson: number) {
     const hashedPassword = await hash(password, 8);
     const user = await prisma.user.create({
-      data: { name, email, password: hashedPassword },
+      data: { name, email, password: hashedPassword, idPerson },
     });
     return user;
   }
@@ -23,14 +23,15 @@ export class UserRepository {
     });
     return user;
   }
-  async updateUser(name: string, email: string, password: string, userId: any) {
+  async updateUser(name: string, email: string, password: string, userId: any, idPerson: number) {
     const hashedPassword = await hash(password, 8);
     const user = await prisma.user.update({
       where: { id: Number(userId) },
       data: {
         name,
         email,
-        password: hashedPassword, // falta alterar
+        password: hashedPassword,
+        idPerson, // falta alterar
       },
     });
     return user;
