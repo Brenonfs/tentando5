@@ -9,20 +9,20 @@ const baseUrl = process.env.DATABASE_PESSOAS_URL;
 export class UserControllers {
   async create(req: Request, res: Response) {
     try {
-      const { name, email, password, cpf, dataNascimento } = req.body;
-      const body = { name, cpf, dataNascimento };
-      const secret = req.headers.secret;
-      const response = await axios.post(`${baseUrl}/people/`, body, {
+      const { name, email, password, cpf } = req.body;
+      const secret = req.headers.secret; // Obtém o cabeçalho 'secret' da solicitação
+
+      const response = await axios.get(`${baseUrl}/people?cpf=${cpf}`, {
         headers: {
-          secret,
+          secret, // Define o cabeçalho 'secret' na solicitação Axios
         },
       });
-      let idPerson;
-      if (response.data.result.id) {
-        idPerson = response.data.result.id;
-      } else if (response.data.result) {
-        idPerson = response.data.result;
+      console.log(response);
+      if (!response) {
+        throw new UnauthorizedError(`Essa pessoa ainda não é cadastrada`);
       }
+      const idPerson = response.data.result.id;
+
       const createUserService = new CreateUserService();
       const result = await createUserService.execute(name, email, password, idPerson);
       return res.json({
