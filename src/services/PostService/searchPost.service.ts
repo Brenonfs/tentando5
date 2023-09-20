@@ -1,12 +1,8 @@
-import { Request } from 'express';
-
 import { UnauthorizedError } from '../../helpers/api-erros';
 import { PostRepository } from '../../repositories/post.repository';
 
 class SearchPostService {
-  async execute(req: Request) {
-    const search = req.query.search as string;
-    const userId = req.user?.id;
+  async execute(search: string, userId: number) {
     if (userId === undefined) {
       throw new UnauthorizedError('Usuário não autenticado.');
     } // aqui faz diferença

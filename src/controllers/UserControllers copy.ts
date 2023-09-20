@@ -10,14 +10,14 @@ export class UserControllers {
   async create(req: Request, res: Response) {
     try {
       const { name, email, password, cpf } = req.body;
-      const secret = req.headers.secret; // Obtém o cabeçalho 'secret' da solicitação
+      const secret = req.headers.secret;
 
       const response = await axios.get(`${baseUrl}/people?cpf=${cpf}`, {
         headers: {
-          secret, // Define o cabeçalho 'secret' na solicitação Axios
+          secret,
         },
       });
-      console.log(response);
+
       if (!response) {
         throw new UnauthorizedError(`Essa pessoa ainda não é cadastrada`);
       }

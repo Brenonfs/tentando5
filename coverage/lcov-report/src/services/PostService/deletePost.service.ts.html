@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">36% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>25/25</span>
+                <span class='fraction'>9/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">36% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>25/25</span>
+                <span class='fraction'>9/25</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -95,22 +95,22 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Request } from 'express';
@@ -119,23 +119,23 @@ import { UnauthorizedError } from '../../helpers/api-erros';
 import { PostRepository } from '../../repositories/post.repository';
 &nbsp;
 class DeletePostService {
-  async execute(req: Request) {
-    const { id } = req.params;
-    const userId = req.user?.id;
-    // if (userId === undefined) {
-    //   throw new UnauthorizedError('Usuário não autenticado.');
-    // } to tirando isso pq n ta fazendo diferença
-    const postRepository = new PostRepository();
-    const postExists = await postRepository.findById(Number(id));
-    if (!postExists) {
-      throw new UnauthorizedError('Nenhum post foi encontrado.');
-    }
-    if (userId !== postExists.userId) {
-      throw new UnauthorizedError('Nenhum post foi encontrado.');
-    }
-    const post = await postRepository.deletePost(Number(id));
-    return post;
-  }
+<span class="fstat-no" title="function not covered" >  async execute(req: Request) {</span>
+<span class="cstat-no" title="statement not covered" >    const { id } = req.params;</span>
+<span class="cstat-no" title="statement not covered" >    const userId = req.user?.id;</span>
+<span class="cstat-no" title="statement not covered" >    // if (userId === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >    //   throw new UnauthorizedError('Usuário não autenticado.');</span>
+<span class="cstat-no" title="statement not covered" >    // } to tirando isso pq n ta fazendo diferença</span>
+<span class="cstat-no" title="statement not covered" >    const postRepository = new PostRepository();</span>
+<span class="cstat-no" title="statement not covered" >    const postExists = await postRepository.findById(Number(id));</span>
+<span class="cstat-no" title="statement not covered" >    if (!postExists) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new UnauthorizedError('Nenhum post foi encontrado.');</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >    if (userId !== postExists.userId) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new UnauthorizedError('Nenhum post foi encontrado.');</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >    const post = await postRepository.deletePost(Number(id));</span>
+<span class="cstat-no" title="statement not covered" >    return post;</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 }
 export { DeletePostService };
 &nbsp;</pre></td></tr></table></pre>
@@ -145,7 +145,7 @@ export { DeletePostService };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-25T14:30:43.340Z
+                at 2023-09-14T01:20:11.545Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

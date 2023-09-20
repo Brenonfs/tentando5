@@ -7,6 +7,6 @@ const userRoutes = Router();
 const userControllers = new UserControllers();
 
 userRoutes.post('/', userControllers.create);
-// userRoutes.put('/', ensureAuthenticated, userControllers.update);
+userRoutes.put('/', ensureAuthenticated, userControllers.update);
 
 export { userRoutes };

@@ -5,7 +5,7 @@ import { UnauthorizedError } from '../../helpers/api-erros';
 import { UserRepository } from '../../repositories/user.repository';
 
 class UpdateUserService {
-  async execute(name: string, email: string, password: string, old_password: string, idPerson: number, userId: any) {
+  async execute(name: string, email: string, password: string, old_password: string, idPerson: number, userId: number) {
     // if (!Number.isInteger(userId)) {
     //   throw new UnauthorizedError('userId inválido');
     // }

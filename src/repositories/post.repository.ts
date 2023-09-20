@@ -15,7 +15,6 @@ export class PostRepository {
     return postExist;
   }
   async findBySearch(search: string, userId: number) {
-    console.log(search);
     const postExist = await prisma.post.findMany({
       where: {
         title: {

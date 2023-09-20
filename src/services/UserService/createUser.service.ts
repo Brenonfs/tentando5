@@ -3,7 +3,6 @@ import { UserRepository } from '../../repositories/user.repository';
 
 class CreateUserService {
   async execute(name: string, email: string, password: string, idPerson: number) {
-    console.log('aqui 3?');
     const userRepository = new UserRepository();
     const userExists = await userRepository.findByEmail(email);
     if (userExists) {

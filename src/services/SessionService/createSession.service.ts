@@ -1,5 +1,4 @@
 import { compare } from 'bcryptjs';
-import { Request } from 'express';
 import { sign } from 'jsonwebtoken';
 
 import { jwtConfig } from '../../configs/auth';
@@ -7,8 +6,7 @@ import { UnauthorizedError } from '../../helpers/api-erros';
 import { SessionRepository } from '../../repositories/session.repository';
 
 class CreateSessionService {
-  async execute(req: Request) {
-    const { email, password } = req.body;
+  async execute(email: string, password: string) {
     const sessionRepository = new SessionRepository();
     const userExist = await sessionRepository.findByEmail(email);
 

@@ -1,53 +1,68 @@
-import axios from 'axios';
 import { Request, Response } from 'express';
+// eslint-disable-next-line import/no-extraneous-dependencies
 
-import { UnauthorizedError } from '../helpers/api-erros';
+import { BadRequestError, UnauthorizedError } from '../helpers/api-erros';
+import { PeopleApi } from '../integrations/people-api';
+import { userCreateSchema, userUpdateSchema } from '../schemas/user';
 import { CreateUserService } from '../services/UserService/createUser.service';
 import { UpdateUserService } from '../services/UserService/updateUser.service';
-const baseUrl = process.env.DATABASE_PESSOAS_URL;
 
 export class UserControllers {
   async create(req: Request, res: Response) {
     try {
-      const { name, email, password, cpf, dataNascimento } = req.body;
-      const body = { name, cpf, dataNascimento };
+      const validatedUserSchema = userCreateSchema.parse(req.body);
+      const body = {
+        name: validatedUserSchema.name,
+        cpf: validatedUserSchema.cpf,
+        dataNascimento: validatedUserSchema.dataNascimento,
+      };
       const secret = req.headers.secret;
-      const response = await axios.post(`${baseUrl}/people/`, body, {
-        headers: {
-          secret,
-        },
-      });
-      let idPerson;
-      if (response.data.result.id) {
-        idPerson = response.data.result.id;
-      } else if (response.data.result) {
-        idPerson = response.data.result;
-      }
+
+      const peopleApi = new PeopleApi(secret as string);
+      const idPerson = await peopleApi.createPerson(body);
+
       const createUserService = new CreateUserService();
-      const result = await createUserService.execute(name, email, password, idPerson);
+      const result = await createUserService.execute(
+        validatedUserSchema.name,
+        validatedUserSchema.email,
+        validatedUserSchema.password,
+        idPerson,
+      );
       return res.json({
         error: false,
-        message: 'Sucess: user created',
+        message: 'Sucesso: usuário criado',
         result,
       });
     } catch (error) {
-      throw new UnauthorizedError(`Não foi possível criar o usuário: ${error}`);
+      console.error('Erro durante a execução do método create:', error);
+      throw new BadRequestError(`Não foi possível criar o usuário: ${error}`);
     }
   }
-  // async update(req: Request, res: Response) {
-  //   const { name, email, password, old_password, idPerson } = req.body;
-  //   const userId = req.user?.id;
-  //   try {
-  //     const updateUserService = new UpdateUserService();
-  //     const result = await updateUserService.execute(name, email, password, old_password, idPerson, userId);
 
-  //     return res.json({
-  //       error: false,
-  //       message: 'Sucess: user updated',
-  //       result,
-  //     });
-  //   } catch (error) {
-  //     throw new UnauthorizedError(`Não foi possível atualizar o usuário: ${error}`);
-  //   }
-  // }
+  async update(req: Request, res: Response) {
+    const validatedUserSchema = userUpdateSchema.parse(req.body);
+    const userId = req.user?.id;
+    try {
+      if (userId === undefined) {
+        throw new UnauthorizedError('Usuário não está autenticado.');
+      }
+      const updateUserService = new UpdateUserService();
+      const result = await updateUserService.execute(
+        validatedUserSchema.name,
+        validatedUserSchema.email,
+        validatedUserSchema.password,
+        validatedUserSchema.old_password,
+        validatedUserSchema.idPerson,
+        userId as number,
+      );
+
+      return res.json({
+        error: false,
+        message: 'Sucess: user updated',
+        result,
+      });
+    } catch (error) {
+      throw new UnauthorizedError(`Não foi possível atualizar o usuário: ${error}`);
+    }
+  }
 }

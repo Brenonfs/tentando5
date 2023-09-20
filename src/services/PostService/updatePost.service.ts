@@ -1,13 +1,8 @@
-import { Request } from 'express';
-
 import { UnauthorizedError } from '../../helpers/api-erros';
 import { PostRepository } from '../../repositories/post.repository';
 
 class UpdatePostService {
-  async execute(req: Request) {
-    const { id } = req.params;
-    const { title, content } = req.body;
-    const userId = req.user?.id;
+  async execute(id: string, title: string, content: string, userId: number) {
     // if (userId === undefined) {
     //   throw new UnauthorizedError('Usuário não autenticado.');
     // } to tirando isso pq n ta fazendo diferença

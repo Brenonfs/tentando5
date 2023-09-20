@@ -1,12 +1,8 @@
-import { Request } from 'express';
-
 import { UnauthorizedError } from '../../helpers/api-erros';
 import { PostRepository } from '../../repositories/post.repository';
 
 class DeletePostService {
-  async execute(req: Request) {
-    const { id } = req.params;
-    const userId = req.user?.id;
+  async execute(id: string, userId: number) {
     // if (userId === undefined) {
     //   throw new UnauthorizedError('Usuário não autenticado.');
     // } to tirando isso pq n ta fazendo diferença
