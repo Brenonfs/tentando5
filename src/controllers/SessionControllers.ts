@@ -5,11 +5,18 @@ import { sessionCreateSchema } from '../schemas/session';
 import { CreateSessionService } from '../services/SessionService/createSession.service';
 
 export class CreateSession {
+  private createSessionService: CreateSessionService;
+
+  constructor() {
+    this.createSessionService = new CreateSessionService();
+  }
   async create(req: Request, res: Response) {
     try {
       const validatedSessionSchema = sessionCreateSchema.parse(req.body);
-      const createSessionService = new CreateSessionService();
-      const result = await createSessionService.execute(validatedSessionSchema.email, validatedSessionSchema.password);
+      const result = await this.createSessionService.execute(
+        validatedSessionSchema.email,
+        validatedSessionSchema.password,
+      );
 
       return res.json({
         error: false,

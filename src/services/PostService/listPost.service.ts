@@ -2,12 +2,14 @@ import { UnauthorizedError } from '../../helpers/api-erros';
 import { PostRepository } from '../../repositories/post.repository';
 
 class ListPostService {
+  private postRepository: PostRepository;
+
+  constructor() {
+    this.postRepository = new PostRepository();
+  }
+
   async execute(id: string, userId: number) {
-    // if (userId === undefined) {
-    //   throw new UnauthorizedError('Usuário não autenticado.');
-    // } to tirando isso pq n ta fazendo diferença
-    const postRepository = new PostRepository();
-    const postExists = await postRepository.findById(Number(id));
+    const postExists = await this.postRepository.findById(Number(id));
     if (!postExists) {
       throw new UnauthorizedError('Nenhum post foi encontrado.');
     }

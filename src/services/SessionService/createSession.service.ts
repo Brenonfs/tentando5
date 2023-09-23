@@ -6,9 +6,13 @@ import { UnauthorizedError } from '../../helpers/api-erros';
 import { SessionRepository } from '../../repositories/session.repository';
 
 class CreateSessionService {
+  private sessionRepository: SessionRepository;
+
+  constructor() {
+    this.sessionRepository = new SessionRepository();
+  }
   async execute(email: string, password: string) {
-    const sessionRepository = new SessionRepository();
-    const userExist = await sessionRepository.findByEmail(email);
+    const userExist = await this.sessionRepository.findByEmail(email);
 
     if (!userExist) {
       throw new UnauthorizedError('Email e/ou senha incorreta');

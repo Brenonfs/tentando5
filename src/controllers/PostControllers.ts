@@ -9,6 +9,20 @@ import { SearchPostService } from '../services/PostService/searchPost.service';
 import { UpdatePostService } from '../services/PostService/updatePost.service';
 
 export class PostControllers {
+  private createPostService: CreatePostService;
+  private deletePostService: DeletePostService;
+  private listPostService: ListPostService;
+  private searchPostService: SearchPostService;
+  private updatePostService: UpdatePostService;
+
+  constructor() {
+    this.createPostService = new CreatePostService();
+    this.deletePostService = new DeletePostService();
+    this.listPostService = new ListPostService();
+    this.searchPostService = new SearchPostService();
+    this.updatePostService = new UpdatePostService();
+  }
+
   async create(req: Request, res: Response) {
     const validatedPostSchema = postCreateSchema.parse(req.body);
     const userId = req.user?.id;
@@ -16,8 +30,11 @@ export class PostControllers {
       throw new UnauthorizedError('Usuário não autenticado.');
     }
     try {
-      const createPostService = new CreatePostService();
-      const result = await createPostService.execute(validatedPostSchema.title, validatedPostSchema.content, userId);
+      const result = await this.createPostService.execute(
+        validatedPostSchema.title,
+        validatedPostSchema.content,
+        userId,
+      );
 
       return res.json({
         error: false,
@@ -38,8 +55,7 @@ export class PostControllers {
         throw new UnauthorizedError('UserId is not authenticated.');
       }
 
-      const updatePostService = new UpdatePostService();
-      const result = await updatePostService.execute(
+      const result = await this.updatePostService.execute(
         validatedIdSchema,
         validatedPostSchema.title,
         validatedPostSchema.content,
@@ -63,8 +79,7 @@ export class PostControllers {
         throw new UnauthorizedError('UserId is not authenticated.');
       }
 
-      const deletePostService = new DeletePostService();
-      const result = await deletePostService.execute(validatedIdSchema, userId as number); // Use uma type assertion aqui
+      const result = await this.deletePostService.execute(validatedIdSchema, userId as number); // Use uma type assertion aqui
 
       return res.json({
         error: false,
@@ -83,8 +98,7 @@ export class PostControllers {
       if (userId === undefined) {
         throw new UnauthorizedError('UserId is not authenticated.');
       }
-      const listPostService = new ListPostService();
-      const result = await listPostService.execute(validatedIdSchema, userId as number);
+      const result = await this.listPostService.execute(validatedIdSchema, userId as number);
 
       return res.json({
         error: false,
@@ -102,8 +116,7 @@ export class PostControllers {
       if (userId === undefined) {
         throw new UnauthorizedError('UserId is not authenticated.');
       }
-      const searchPostService = new SearchPostService();
-      const result = await searchPostService.execute(validatedPostSchema.search, userId as number);
+      const result = await this.searchPostService.execute(validatedPostSchema.search, userId as number);
 
       return res.json({
         error: false,

@@ -2,12 +2,19 @@ import { Request, Response } from 'express';
 // eslint-disable-next-line import/no-extraneous-dependencies
 
 import { BadRequestError, UnauthorizedError } from '../helpers/api-erros';
-import { PeopleApi } from '../integrations/people-api';
 import { userCreateSchema, userUpdateSchema } from '../schemas/user';
 import { CreateUserService } from '../services/UserService/createUser.service';
 import { UpdateUserService } from '../services/UserService/updateUser.service';
 
 export class UserControllers {
+  private createUserService: CreateUserService;
+  private updateUserService: UpdateUserService;
+
+  constructor() {
+    this.createUserService = new CreateUserService();
+    this.updateUserService = new UpdateUserService();
+  }
+
   async create(req: Request, res: Response) {
     try {
       const validatedUserSchema = userCreateSchema.parse(req.body);
@@ -18,11 +25,9 @@ export class UserControllers {
       };
       const secret = req.headers.secret;
 
-      const peopleApi = new PeopleApi(secret as string);
-      const idPerson = await peopleApi.createPerson(body);
+      const idPerson = await this.createUserService.apiExterna(secret as string, body);
 
-      const createUserService = new CreateUserService();
-      const result = await createUserService.execute(
+      const result = await this.createUserService.execute(
         validatedUserSchema.name,
         validatedUserSchema.email,
         validatedUserSchema.password,
@@ -46,8 +51,7 @@ export class UserControllers {
       if (userId === undefined) {
         throw new UnauthorizedError('Usuário não está autenticado.');
       }
-      const updateUserService = new UpdateUserService();
-      const result = await updateUserService.execute(
+      const result = await this.updateUserService.execute(
         validatedUserSchema.name,
         validatedUserSchema.email,
         validatedUserSchema.password,
